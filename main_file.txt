@@ -1,0 +1,91 @@
+a=imread('sample21.jpg');
+ 
+% eye to eye distance
+
+   h=msgbox('select eye to eye'); 
+  [eye1,eye2]=getpts(get(imshow(a),'Parent'));
+   ex1=single(eye1(1));
+   ex2=single(eye1(2));
+   ey1=single(eye2(1));
+   ey2=single(eye2(2));
+   eye_to_eye_d=sqrt(((ex1-ex2)^2)+((ey1-ey2)^2));
+   
+% right eye to nose distance
+
+  h1=msgbox('select right eye to nose');
+ [nose1,nose2]=getpts(get(imshow(a),'Parent'));
+   nx1=single(nose1(1));
+   nx2=single(nose1(2));
+   ny1=single(nose2(1));
+   ny2=single(nose2(2));
+   eye_to_nose_d=sqrt(((nx1-nx2)^2)+((ny1-ny2)^2));
+   
+%  right eye to chin distance
+
+   h2=msgbox('select right eye to chin');
+  [chin1,chin2]=getpts(get(imshow(a),'Parent'));
+   cx1=single(chin1(1));
+   cx2=single(chin1(2));
+   cy1=single(chin2(1));
+   cy2=single(chin2(2));
+   eye_to_chin_d=sqrt(((cx1-cx2)^2)+((cy1-cy2)^2));
+   
+% right eye to lip distance
+
+  h3=msgbox('select right eye to lip');
+ [lip1,lip2]=getpts(get(imshow(a),'Parent'));
+   lx1=single(lip1(1));
+   lx2=single(lip1(2));
+   ly1=single(lip2(1));
+   ly2=single(lip2(2));
+   eye_to_lip_d=sqrt(((lx1-lx2)^2)+((ly1-ly2)^2));
+   
+   ratio1=(eye_to_eye_d)/(eye_to_nose_d);
+   ratio2=(eye_to_nose_d)/(eye_to_chin_d);
+   ratio3=(eye_to_eye_d)/(eye_to_chin_d);
+   ratio4=(eye_to_nose_d)/(eye_to_lip_d);
+   
+    disp(ratio1);
+    disp(ratio2);
+    disp(ratio3);
+    disp(ratio4);
+
+   status='invalid';
+   
+%     if((ratio1>=1.1000 && ratio2>=0.7450) || (ratio3<=1.3714 && ratio4>=0.6404))
+%         status='female';
+%     elseif((ratio1<=1.09 && ratio2<=0.7440) || (ratio3>=1.3714 && ratio4<=0.6400))
+%         status='male';
+%     end
+%     
+
+if(ratio1>=1.1000 && ratio2>=0.7450)
+    status='female';
+elseif(ratio1<=1.09 && ratio2<=0.7440)
+    status='male';
+end
+
+ if(ratio3<=1.3714 && ratio4>=0.6404)
+     
+ %         if(ratio1>=1.1000 && ratio2>=0.7450)
+ %             status='female';
+         if(ratio1<=1.09 && ratio2<=0.7440)
+             status='female';
+         else
+             status='male';
+         end
+      
+         
+ else
+          if(ratio1>=1.1000 && ratio2>=0.7450)
+             status='female';
+ %         elseif(ratio1<=1.09 && ratio2<=0.7440)
+ %             status='male';
+         else
+             status='male';
+         end
+     
+ end
+
+    
+   display=msgbox(status);
